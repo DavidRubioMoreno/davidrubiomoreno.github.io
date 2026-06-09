@@ -6,14 +6,17 @@
   <title>Portfolio | David Rubio Moreno</title>
   <style>
     :root {
-      --bg: #f7f3ee;
-      --text: #202124;
-      --muted: #64676c;
-      --accent: #0f766e;
-      --accent-dark: #115e59;
-      --panel: #ffffff;
-      --line: #ded8cf;
-      --shadow: 0 18px 45px rgba(32, 33, 36, 0.12);
+      --bg: #070b12;
+      --bg-soft: #0d1420;
+      --text: #f4f7fb;
+      --muted: #a9b4c4;
+      --accent: #35d0ba;
+      --accent-dark: #11a896;
+      --accent-warm: #e6b450;
+      --panel: rgba(16, 25, 39, 0.86);
+      --panel-strong: #111c2b;
+      --line: rgba(255, 255, 255, 0.12);
+      --shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
     }
 
     * {
@@ -24,11 +27,26 @@
       scroll-behavior: smooth;
     }
 
+    @keyframes soft-pulse {
+      0%,
+      100% {
+        opacity: 0.38;
+        transform: translateX(-50%) scaleX(0.92);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1);
+      }
+    }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top left, rgba(53, 208, 186, 0.16), transparent 32rem),
+        linear-gradient(180deg, #070b12 0%, #09111d 45%, #070b12 100%);
       line-height: 1.6;
     }
 
@@ -41,8 +59,8 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      border-bottom: 1px solid rgba(222, 216, 207, 0.8);
-      background: rgba(247, 243, 238, 0.92);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(7, 11, 18, 0.82);
       backdrop-filter: blur(14px);
     }
 
@@ -59,6 +77,7 @@
     .brand {
       font-weight: 800;
       letter-spacing: 0;
+      color: #ffffff;
     }
 
     .nav-links {
@@ -70,7 +89,15 @@
     }
 
     .nav-links a:hover {
-      color: var(--accent-dark);
+      color: var(--accent);
+    }
+
+    .nav-links a,
+    .brand,
+    .button,
+    .contact-link,
+    .project-link {
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     }
 
     .hero {
@@ -79,8 +106,9 @@
       align-items: center;
       padding: 72px 0;
       background:
-        linear-gradient(rgba(247, 243, 238, 0.78), rgba(247, 243, 238, 0.95)),
-        url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=80") center/cover;
+        linear-gradient(90deg, rgba(7, 11, 18, 0.96) 0%, rgba(7, 11, 18, 0.78) 48%, rgba(7, 11, 18, 0.44) 100%),
+        linear-gradient(180deg, rgba(7, 11, 18, 0.15), rgba(7, 11, 18, 0.98)),
+        url("assets/images/earth_bg.webp") center/cover;
     }
 
     .container {
@@ -90,11 +118,12 @@
 
     .hero-content {
       max-width: 760px;
+      padding-top: 36px;
     }
 
     .eyebrow {
       margin: 0 0 12px;
-      color: var(--accent-dark);
+      color: var(--accent);
       font-weight: 700;
       text-transform: uppercase;
       font-size: 0.82rem;
@@ -111,12 +140,13 @@
     h1 {
       font-size: clamp(3rem, 9vw, 6.6rem);
       max-width: 900px;
+      letter-spacing: 0;
     }
 
     .hero p {
       max-width: 620px;
       margin: 24px 0 32px;
-      color: #3c4043;
+      color: #d3dbe7;
       font-size: 1.14rem;
     }
 
@@ -135,23 +165,68 @@
       border-radius: 8px;
       border: 1px solid var(--accent);
       background: var(--accent);
-      color: #ffffff;
+      color: #061017;
       font-weight: 700;
-      box-shadow: 0 10px 24px rgba(15, 118, 110, 0.22);
+      box-shadow: 0 12px 28px rgba(53, 208, 186, 0.22);
     }
 
     .button.secondary {
-      background: transparent;
-      color: var(--accent-dark);
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
       box-shadow: none;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .button:hover,
+    .contact-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
     }
 
     section {
+      position: relative;
       padding: 86px 0;
+      transition: background 0.28s ease;
+    }
+
+    section:nth-of-type(even) {
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: min(1120px, calc(100% - 32px));
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(53, 208, 186, 0.85), transparent);
+      opacity: 0;
+      transform: translateX(-50%) scaleX(0.82);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      pointer-events: none;
+    }
+
+    section:hover::before {
+      opacity: 1;
+      transform: translateX(-50%) scaleX(1);
+      animation: soft-pulse 1.8s ease-in-out infinite;
+    }
+
+    section:hover .section-title h2 {
+      color: var(--accent);
     }
 
     .section-title {
       margin-bottom: 28px;
+    }
+
+    .section-title h2 {
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    section:hover .section-title h2 {
+      transform: translateX(6px);
     }
 
     .section-title p {
@@ -173,10 +248,18 @@
       border-radius: 8px;
       background: var(--panel);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
     }
 
     .panel {
       padding: 28px;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-4px);
+      border-color: rgba(53, 208, 186, 0.45);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.46);
     }
 
     .panel p {
@@ -196,54 +279,109 @@
       border-bottom: 1px solid var(--line);
     }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+    .skills-carousel {
+      width: 100%;
+      overflow: hidden;
+      padding: 28px 0;
+      cursor: grab;
+      user-select: none;
+      mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
     }
 
-    .skill {
-      min-height: 88px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #ffffff;
+    .skills-carousel:active {
+      cursor: grabbing;
+    }
+
+    .skills-track {
       display: flex;
       align-items: center;
-      font-weight: 700;
+      gap: 22px;
+      width: max-content;
+      will-change: transform;
+    }
+
+    .skill-item {
+      width: 126px;
+      height: 126px;
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035)),
+        var(--panel-strong);
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.26);
+      display: grid;
+      place-items: center;
+      transform-origin: center;
+      transition: opacity 0.18s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .skill-item:hover {
+      border-color: rgba(53, 208, 186, 0.72);
+      box-shadow: 0 20px 48px rgba(53, 208, 186, 0.16);
+    }
+
+    .skill-item img {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      pointer-events: none;
+      filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
     }
 
     .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
     .project-card {
       overflow: hidden;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 188px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(53, 208, 186, 0.42);
+    }
+
+    .project-card:hover .project-media {
+      filter: saturate(1.14) brightness(1.08);
+    }
+
+    .project-card:hover .project-link {
+      color: var(--accent-warm);
+      transform: translateX(4px);
     }
 
     .project-media {
-      min-height: 170px;
+      min-height: 100%;
+      transition: filter 0.24s ease;
       background:
-        linear-gradient(135deg, rgba(15, 118, 110, 0.82), rgba(252, 211, 77, 0.76)),
+        linear-gradient(135deg, rgba(53, 208, 186, 0.72), rgba(230, 180, 80, 0.58)),
         url("https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=80") center/cover;
     }
 
     .project-card:nth-child(2) .project-media {
       background:
-        linear-gradient(135deg, rgba(37, 99, 235, 0.78), rgba(244, 114, 182, 0.6)),
+        linear-gradient(135deg, rgba(64, 120, 255, 0.72), rgba(53, 208, 186, 0.44)),
         url("https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=900&q=80") center/cover;
     }
 
     .project-card:nth-child(3) .project-media {
       background:
-        linear-gradient(135deg, rgba(22, 163, 74, 0.78), rgba(249, 115, 22, 0.62)),
+        linear-gradient(135deg, rgba(230, 180, 80, 0.65), rgba(17, 168, 150, 0.58)),
         url("https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80") center/cover;
     }
 
     .project-body {
-      padding: 22px;
+      padding: 26px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .project-body p {
@@ -252,12 +390,14 @@
     }
 
     .project-link {
-      color: var(--accent-dark);
+      color: var(--accent);
       font-weight: 800;
     }
 
     .contact {
-      background: #202124;
+      background:
+        radial-gradient(circle at top right, rgba(53, 208, 186, 0.16), transparent 26rem),
+        #070b12;
       color: #ffffff;
     }
 
@@ -285,7 +425,7 @@
 
     .site-footer {
       padding: 22px 0;
-      background: #18191b;
+      background: #05070c;
       color: #b7bbc2;
       font-size: 0.9rem;
     }
@@ -305,15 +445,29 @@
 
       .hero {
         min-height: auto;
+        background-position: 62% center;
       }
 
-      .about-grid,
-      .portfolio-grid {
+      .about-grid {
         grid-template-columns: 1fr;
       }
 
-      .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .project-media {
+        min-height: 190px;
+      }
+
+      .skill-item {
+        width: 104px;
+        height: 104px;
+      }
+
+      .skill-item img {
+        width: 54px;
+        height: 54px;
       }
     }
 
@@ -326,14 +480,31 @@
         font-size: 3rem;
       }
 
-      .skills-grid {
-        grid-template-columns: 1fr;
+      .hero {
+        padding: 58px 0;
+      }
+
+      .project-body {
+        padding: 22px;
       }
 
       .button,
       .button.secondary,
       .contact-link {
         width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
       }
     }
   </style>
@@ -409,15 +580,69 @@
             Tecnologias y capacidades que podras ajustar despues segun tu perfil real.
           </p>
         </div>
-        <div class="skills-grid">
-          <div class="skill">HTML</div>
-          <div class="skill">CSS</div>
-          <div class="skill">JavaScript</div>
-          <div class="skill">Git</div>
-          <div class="skill">Responsive Design</div>
-          <div class="skill">UI basica</div>
-          <div class="skill">Bases de datos</div>
-          <div class="skill">Trabajo en equipo</div>
+        <div class="skills-carousel" aria-label="Carrusel de tecnologias">
+          <div class="skills-track">
+            <div class="skill-item"><img src="assets/icons/anaconda.webp" alt="Anaconda"></div>
+            <div class="skill-item"><img src="assets/icons/android.webp" alt="Android"></div>
+            <div class="skill-item"><img src="assets/icons/blender.webp" alt="Blender"></div>
+            <div class="skill-item"><img src="assets/icons/c.webp" alt="C"></div>
+            <div class="skill-item"><img src="assets/icons/cmake.webp" alt="CMake"></div>
+            <div class="skill-item"><img src="assets/icons/cpp.webp" alt="C++"></div>
+            <div class="skill-item"><img src="assets/icons/csharp.webp" alt="C#"></div>
+            <div class="skill-item"><img src="assets/icons/fmod.webp" alt="FMOD"></div>
+            <div class="skill-item"><img src="assets/icons/git.webp" alt="Git"></div>
+            <div class="skill-item"><img src="assets/icons/github.webp" alt="GitHub"></div>
+            <div class="skill-item"><img src="assets/icons/github-b.webp" alt="GitHub"></div>
+            <div class="skill-item"><img src="assets/icons/java.webp" alt="Java"></div>
+            <div class="skill-item"><img src="assets/icons/javascript.webp" alt="JavaScript"></div>
+            <div class="skill-item"><img src="assets/icons/jupyter.webp" alt="Jupyter"></div>
+            <div class="skill-item"><img src="assets/icons/linkedin.webp" alt="LinkedIn"></div>
+            <div class="skill-item"><img src="assets/icons/mail.webp" alt="Email"></div>
+            <div class="skill-item"><img src="assets/icons/node.webp" alt="Node.js"></div>
+            <div class="skill-item"><img src="assets/icons/numpy.webp" alt="NumPy"></div>
+            <div class="skill-item"><img src="assets/icons/ogre.webp" alt="OGRE"></div>
+            <div class="skill-item"><img src="assets/icons/opengl.webp" alt="OpenGL"></div>
+            <div class="skill-item"><img src="assets/icons/pandas.webp" alt="Pandas"></div>
+            <div class="skill-item"><img src="assets/icons/phaser.webp" alt="Phaser"></div>
+            <div class="skill-item"><img src="assets/icons/physx.webp" alt="PhysX"></div>
+            <div class="skill-item"><img src="assets/icons/python.webp" alt="Python"></div>
+            <div class="skill-item"><img src="assets/icons/sdl.webp" alt="SDL"></div>
+            <div class="skill-item"><img src="assets/icons/unity.webp" alt="Unity"></div>
+            <div class="skill-item"><img src="assets/icons/unreal.webp" alt="Unreal Engine"></div>
+            <div class="skill-item"><img src="assets/icons/virtualbox.webp" alt="VirtualBox"></div>
+            <div class="skill-item"><img src="assets/icons/visual.webp" alt="Visual Studio"></div>
+            <div class="skill-item"><img src="assets/icons/visualcode.webp" alt="Visual Studio Code"></div>
+            <div class="skill-item"><img src="assets/icons/anaconda.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/android.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/blender.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/c.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/cmake.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/cpp.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/csharp.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/fmod.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/git.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/github.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/github-b.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/java.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/javascript.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/jupyter.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/linkedin.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/mail.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/node.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/numpy.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/ogre.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/opengl.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/pandas.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/phaser.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/physx.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/python.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/sdl.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/unity.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/unreal.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/virtualbox.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/visual.webp" alt="" aria-hidden="true"></div>
+            <div class="skill-item"><img src="assets/icons/visualcode.webp" alt="" aria-hidden="true"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -427,31 +652,31 @@
         <div class="section-title">
           <h2>Portfolio</h2>
           <p>
-            Aqui iran tus proyectos. De momento hay tarjetas de ejemplo para
-            comprobar la estructura visual de la pagina.
+            Aqui iran tus proyectos. La lista esta preparada para crecer con
+            bastantes trabajos sin que la seccion pierda claridad.
           </p>
         </div>
         <div class="portfolio-grid">
           <article class="project-card">
             <div class="project-media" aria-hidden="true"></div>
             <div class="project-body">
-              <h3>Proyecto 1</h3>
-              <p>Descripcion breve del proyecto, tecnologias usadas y objetivo principal.</p>
+              <h3>Proyecto destacado 1</h3>
+              <p>Descripcion breve del proyecto, tecnologias usadas, objetivo principal y enlace a demo o repositorio.</p>
               <a class="project-link" href="#">Ver proyecto</a>
             </div>
           </article>
           <article class="project-card">
             <div class="project-media" aria-hidden="true"></div>
             <div class="project-body">
-              <h3>Proyecto 2</h3>
-              <p>Otra tarjeta preparada para mostrar una demo, repositorio o caso practico.</p>
+              <h3>Proyecto destacado 2</h3>
+              <p>Otra fila preparada para mostrar una demo, repositorio, capturas o caso practico.</p>
               <a class="project-link" href="#">Ver proyecto</a>
             </div>
           </article>
           <article class="project-card">
             <div class="project-media" aria-hidden="true"></div>
             <div class="project-body">
-              <h3>Proyecto 3</h3>
+              <h3>Proyecto destacado 3</h3>
               <p>Espacio para explicar resultados, retos tecnicos y aprendizajes del trabajo.</p>
               <a class="project-link" href="#">Ver proyecto</a>
             </div>
@@ -483,5 +708,6 @@
       © 2026 David Rubio Moreno. Portfolio en desarrollo.
     </div>
   </footer>
+  <script src="scripts/carousel.js"></script>
 </body>
 </html>
