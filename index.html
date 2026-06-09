@@ -338,8 +338,8 @@
     .project-card {
       overflow: hidden;
       display: grid;
-      grid-template-columns: 240px 1fr;
-      min-height: 188px;
+      grid-template-columns: minmax(360px, 48%) 1fr;
+      min-height: 300px;
       transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
@@ -358,23 +358,35 @@
     }
 
     .project-media {
+      position: relative;
       min-height: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
       transition: filter 0.24s ease;
-      background:
-        linear-gradient(135deg, rgba(53, 208, 186, 0.72), rgba(230, 180, 80, 0.58)),
-        url("https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=80") center/cover;
+      background: #05070c;
     }
 
-    .project-card:nth-child(2) .project-media {
+    .project-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
       background:
-        linear-gradient(135deg, rgba(64, 120, 255, 0.72), rgba(53, 208, 186, 0.44)),
-        url("https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=900&q=80") center/cover;
+        linear-gradient(90deg, rgba(7, 11, 18, 0.06), rgba(7, 11, 18, 0.36)),
+        linear-gradient(180deg, transparent 58%, rgba(7, 11, 18, 0.46));
+      pointer-events: none;
     }
 
-    .project-card:nth-child(3) .project-media {
-      background:
-        linear-gradient(135deg, rgba(230, 180, 80, 0.65), rgba(17, 168, 150, 0.58)),
-        url("https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80") center/cover;
+    .project-video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transform: scale(1.01);
+      transition: transform 0.28s ease;
+    }
+
+    .project-card:hover .project-video {
+      transform: scale(1.045);
     }
 
     .project-body {
@@ -457,7 +469,8 @@
       }
 
       .project-media {
-        min-height: 190px;
+        min-height: auto;
+        aspect-ratio: 16 / 9;
       }
 
       .skill-item {
@@ -658,26 +671,26 @@
         </div>
         <div class="portfolio-grid">
           <article class="project-card">
-            <div class="project-media" aria-hidden="true"></div>
+            <div class="project-media">
+              <video class="project-video" muted loop playsinline preload="metadata">
+                <source src="assets/videos/Demo%20H-Engine.mp4" type="video/mp4">
+              </video>
+            </div>
             <div class="project-body">
-              <h3>Proyecto destacado 1</h3>
-              <p>Descripcion breve del proyecto, tecnologias usadas, objetivo principal y enlace a demo o repositorio.</p>
+              <h3>H-Engine</h3>
+              <p>Demo del proyecto. Esta fila queda preparada para explicar tecnologias usadas, objetivo principal y enlace a demo o repositorio.</p>
               <a class="project-link" href="#">Ver proyecto</a>
             </div>
           </article>
           <article class="project-card">
-            <div class="project-media" aria-hidden="true"></div>
-            <div class="project-body">
-              <h3>Proyecto destacado 2</h3>
-              <p>Otra fila preparada para mostrar una demo, repositorio, capturas o caso practico.</p>
-              <a class="project-link" href="#">Ver proyecto</a>
+            <div class="project-media">
+              <video class="project-video" muted loop playsinline preload="metadata">
+                <source src="assets/videos/Trailer%20H-Defense.mp4" type="video/mp4">
+              </video>
             </div>
-          </article>
-          <article class="project-card">
-            <div class="project-media" aria-hidden="true"></div>
             <div class="project-body">
-              <h3>Proyecto destacado 3</h3>
-              <p>Espacio para explicar resultados, retos tecnicos y aprendizajes del trabajo.</p>
+              <h3>H-Defense</h3>
+              <p>Trailer del proyecto. Puedes usar este espacio para resumir gameplay, retos tecnicos, resultados y aprendizajes.</p>
               <a class="project-link" href="#">Ver proyecto</a>
             </div>
           </article>
@@ -696,8 +709,8 @@
         </div>
         <div class="contact-actions">
           <a class="contact-link" href="mailto:tuemail@example.com">tuemail@example.com</a>
-          <a class="contact-link" href="#">LinkedIn</a>
-          <a class="contact-link" href="#">GitHub</a>
+          <a class="contact-link" href="https://www.linkedin.com/in/david-rubio-moreno-a94681409/?trk=public-profile-join-page" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="contact-link" href="https://github.com/DavidRubioMoreno" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </div>
     </section>
@@ -709,5 +722,6 @@
     </div>
   </footer>
   <script src="scripts/carousel.js"></script>
+  <script src="scripts/project-videos.js"></script>
 </body>
 </html>
