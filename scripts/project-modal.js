@@ -127,13 +127,10 @@ if ("IntersectionObserver" in window) {
   const projectCardObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        entry.target.classList.add("is-visible");
-        projectCardObserver.unobserve(entry.target);
+        entry.target.classList.toggle("is-visible", entry.isIntersecting);
       });
     },
-    { threshold: 0.18 }
+    { threshold: 0.18, rootMargin: "0px 0px -40px 0px" }
   );
 
   animatedProjectCards.forEach((card) => projectCardObserver.observe(card));
