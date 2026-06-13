@@ -340,10 +340,21 @@
       display: grid;
       grid-template-columns: minmax(360px, 48%) 1fr;
       min-height: 300px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      opacity: 0;
+      transform: translateX(-52px);
+      transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.2s ease;
     }
 
-    .project-card:hover {
+    .project-card:nth-child(even) {
+      transform: translateX(52px);
+    }
+
+    .project-card.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .project-card.is-visible:hover {
       transform: translateY(-3px);
       border-color: rgba(53, 208, 186, 0.42);
     }
@@ -404,6 +415,168 @@
     .project-link {
       color: var(--accent);
       font-weight: 800;
+    }
+
+    .project-action {
+      min-height: 44px;
+      padding: 0 18px;
+      border: 1px solid rgba(53, 208, 186, 0.65);
+      border-radius: 999px;
+      background:
+        linear-gradient(135deg, rgba(53, 208, 186, 0.18), rgba(230, 180, 80, 0.12)),
+        rgba(255, 255, 255, 0.04);
+      color: #ffffff;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(53, 208, 186, 0.14);
+      transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .project-action:hover,
+    .project-action:focus-visible {
+      color: var(--accent-warm);
+      border-color: var(--accent-warm);
+      box-shadow: 0 16px 34px rgba(230, 180, 80, 0.16);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .project-links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .project-card .project-links-row .project-link {
+      display: none;
+    }
+
+    .project-media-placeholder {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--panel-strong) 0%, #0c1421 100%);
+      font-size: 3rem;
+      font-weight: 800;
+      border-right: 1px solid var(--line);
+      position: relative;
+    }
+
+    .project-media-placeholder::before {
+      content: attr(data-initials);
+      position: absolute;
+      font-family: Arial, sans-serif;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-warm));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0.72;
+    }
+
+    .project-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(3, 7, 12, 0.78);
+      backdrop-filter: blur(10px);
+    }
+
+    .project-modal.open {
+      display: flex;
+    }
+
+    .project-modal-dialog {
+      width: min(1080px, 100%);
+      max-height: min(860px, calc(100vh - 48px));
+      overflow: auto;
+      border: 1px solid rgba(53, 208, 186, 0.36);
+      border-radius: 12px;
+      background: var(--panel-strong);
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.55);
+    }
+
+    .project-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .project-modal-close {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .project-modal-content {
+      display: grid;
+      grid-template-columns: minmax(320px, 58%) 1fr;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    .project-modal-media {
+      min-height: 320px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #05070c;
+    }
+
+    .project-modal-media iframe,
+    .project-modal-media video {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      display: block;
+      border: 0;
+      object-fit: cover;
+    }
+
+    .project-modal-media .project-media-placeholder {
+      min-height: 320px;
+    }
+
+    .project-modal-info p {
+      color: var(--muted);
+      margin: 0 0 22px;
+    }
+
+    .project-modal-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .project-modal-links a {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(53, 208, 186, 0.45);
+      border-radius: 8px;
+      padding: 0 16px;
+      color: var(--accent);
+      background: rgba(53, 208, 186, 0.08);
+      font-weight: 800;
+    }
+
+    body.modal-open {
+      overflow: hidden;
     }
 
     .contact {
@@ -468,6 +641,10 @@
         grid-template-columns: 1fr;
       }
 
+      .project-modal-content {
+        grid-template-columns: 1fr;
+      }
+
       .project-media {
         min-height: auto;
         aspect-ratio: 16 / 9;
@@ -520,6 +697,96 @@
         transition: none !important;
       }
     }
+
+    .contributions-panel {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contribution-years {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contribution-year {
+      min-height: 38px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .contribution-year:hover,
+    .contribution-year.active {
+      border-color: var(--accent);
+      background: rgba(53, 208, 186, 0.12);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .contribution-summary {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .calendar-wrapper {
+      overflow-x: auto;
+      padding: 14px 0;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(53, 12px);
+      grid-template-rows: repeat(7, 12px);
+      grid-auto-flow: column;
+      gap: 4px;
+      width: max-content;
+    }
+
+    .contribution-day {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: var(--panel-strong);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .contribution-day[data-level="1"] {
+      background: #0e3530;
+    }
+
+    .contribution-day[data-level="2"] {
+      background: #155e54;
+    }
+
+    .contribution-day[data-level="3"] {
+      background: #229181;
+    }
+
+    .contribution-day[data-level="4"] {
+      background: var(--accent);
+    }
+
+    .contribution-legend {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .contribution-legend span:not(:first-child):not(:last-child) {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
   </style>
 </head>
 <body>
@@ -528,6 +795,7 @@
       <a class="brand" href="#inicio">David Rubio Moreno</a>
       <div class="nav-links">
         <a href="#sobre-mi">Sobre mi</a>
+        <a href="#contribuciones">GitHub</a>
         <a href="#skills">Skills</a>
         <a href="#portfolio">Portfolio</a>
         <a href="#contacto">Contacto</a>
@@ -581,6 +849,33 @@
             </ul>
             <a class="button" href="#" aria-label="Descargar CV cuando este disponible">Descargar CV</a>
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="contribuciones">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contribuciones en GitHub</h2>
+          <p>
+            Mapa anual de actividad en mis repositorios publicos de GitHub.
+          </p>
+        </div>
+        <div class="panel contributions-panel">
+          <div class="contribution-years" aria-label="Seleccionar ano de contribuciones"></div>
+          <div class="contribution-summary" aria-live="polite">Cargando contribuciones...</div>
+          <div class="calendar-wrapper">
+            <div class="calendar" aria-label="Mapa de contribuciones por dia"></div>
+          </div>
+          <div class="contribution-legend" aria-hidden="true">
+            <span>Menos</span>
+            <span class="contribution-day" data-level="0"></span>
+            <span class="contribution-day" data-level="1"></span>
+            <span class="contribution-day" data-level="2"></span>
+            <span class="contribution-day" data-level="3"></span>
+            <span class="contribution-day" data-level="4"></span>
+            <span>Mas</span>
+          </div>
         </div>
       </div>
     </section>
@@ -665,8 +960,7 @@
         <div class="section-title">
           <h2>Portfolio</h2>
           <p>
-            Aqui iran tus proyectos. La lista esta preparada para crecer con
-            bastantes trabajos sin que la seccion pierda claridad.
+            Proyectos de desarrollo de software, simulación física, motores gráficos y videojuegos en los que he trabajado.
           </p>
         </div>
         <div class="portfolio-grid">
@@ -678,10 +972,13 @@
             </div>
             <div class="project-body">
               <h3>H-Engine</h3>
-              <p>Demo del proyecto. Esta fila queda preparada para explicar tecnologias usadas, objetivo principal y enlace a demo o repositorio.</p>
-              <a class="project-link" href="#">Ver proyecto</a>
+              <p>Motor gráfico 3D de alto rendimiento desarrollado en C++ utilizando APIs gráficas modernas. Diseñado para profundizar en sistemas de renderizado, shaders, gestión avanzada de memoria y físicas.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://github.com/DavidRubioMoreno" target="_blank" rel="noopener noreferrer">GitHub</a>
+              </div>
             </div>
           </article>
+
           <article class="project-card">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
@@ -689,9 +986,118 @@
               </video>
             </div>
             <div class="project-body">
-              <h3>H-Defense</h3>
-              <p>Trailer del proyecto. Puedes usar este espacio para resumir gameplay, retos tecnicos, resultados y aprendizajes.</p>
-              <a class="project-link" href="#">Ver proyecto</a>
+              <h3>H-TowerDefense</h3>
+              <p>Juego estilo Tower Defense en 3D con oleadas dinámicas de enemigos. Implementa inteligencia artificial para búsqueda de caminos (pathfinding), un sistema estratégico de construcción y físicas avanzadas.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://github.com/DavidRubioMoreno/HTowerDefense" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <div class="project-media-placeholder" data-initials="ER"></div>
+            </div>
+            <div class="project-body">
+              <h3>Endless Redemption</h3>
+              <p>Videojuego de acción y rol en tercera persona desarrollado en Unity. Presenta mecánicas de combate pulidas, animaciones fluidas, un sistema dinámico de combos y progresión del personaje.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://github.com/DavidRubioMoreno/EndlessRedemption" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+                <a class="project-link" href="https://www.youtube.com/watch?v=7dzWf-mmL_Q" target="_blank" rel="noopener noreferrer">Ver Trailer</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <div class="project-media-placeholder" data-initials="CA"></div>
+            </div>
+            <div class="project-body">
+              <h3>Cosmic Architect</h3>
+              <p>Herramienta procedural interactiva desarrollada para Unreal Engine 5. Permite diseñar, generar y orbitar sistemas estelares enteros, planetas y cinturones de asteroides con alta fidelidad visual.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://github.com/narratech/TFG-Bravo-Perez-Rubio" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+                <a class="project-link" href="https://www.fab.com/listings/4e181e3f-0077-4ed6-8079-39e679ddfe24?tab=reviews" target="_blank" rel="noopener noreferrer">Ver en Fab</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <div class="project-media-placeholder" data-initials="NT"></div>
+            </div>
+            <div class="project-body">
+              <h3>Nightmare Tales</h3>
+              <p>Aventura inmersiva de misterio y puzles en primera persona creada para la Global Game Jam 2026. Ofrece un diseño sonoro envolvente, una atmósfera tensa y mecánicas narrativas interactivas.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://github.com/DavidRubioMoreno/GlobalGameJam_2026" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+                <a class="project-link" href="https://globalgamejam.org/games/2026/juego-ninis-7" target="_blank" rel="noopener noreferrer">Página en GGJ</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <div class="project-media-placeholder" data-initials="AA"></div>
+            </div>
+            <div class="project-body">
+              <h3>Aprendizaje Automático Shooter</h3>
+              <p>Simulador de entrenamiento en entorno shooter utilizando aprendizaje por refuerzo. Agentes controlados por IA autónoma (ML-Agents) aprenden tácticas de combate y toma de decisiones tácticas.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://github.com/DavidRubioMoreno/IAV25-RubioMoreno" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <div class="project-media-placeholder" data-initials="BI"></div>
+            </div>
+            <div class="project-body">
+              <h3>Bridge It</h3>
+              <p>Simulador estructural interactivo centrado en la ingeniería física de puentes. Calcula fuerzas, tensiones máximas y fatiga de materiales en tiempo real bajo cargas pesadas.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://github.com/DavidRubioMoreno/SimulacionFisicaVideojuegos" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <div class="project-media-placeholder" data-initials="MB"></div>
+            </div>
+            <div class="project-body">
+              <h3>Manín: El Líder de la Banda</h3>
+              <p>Juego de ritmo y humor publicado en Itch.io. Ayuda al carismático Manín a dirigir a su peculiar grupo de músicos coordinando movimientos rápidos con sincronización perfecta.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://crest646.itch.io/manin-el-lider-de-la-banda" target="_blank" rel="noopener noreferrer">Jugar en Itch.io</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <div class="project-media-placeholder" data-initials="ST"></div>
+            </div>
+            <div class="project-body">
+              <h3>String Typing</h3>
+              <p>Juego arcade de velocidad de escritura y reflejos. Desafía tu destreza tecleando con fluidez hilos dinámicos para avanzar y desbloquear niveles con ritmos rápidos.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://javi16333.itch.io/string-typing" target="_blank" rel="noopener noreferrer">Jugar en Itch.io</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <div class="project-media-placeholder" data-initials="TS"></div>
+            </div>
+            <div class="project-body">
+              <h3>The Simulation</h3>
+              <p>Simulador sandbox físico completo en Itch.io. Experimenta con la interacción gravitatoria de cuerpos celestes, órbitas, colisiones masivas y dinámicas de fluidos a nivel macrocósmico.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://davidrubiomoreno.itch.io/thesimulation" target="_blank" rel="noopener noreferrer">Jugar en Itch.io</a>
+              </div>
             </div>
           </article>
         </div>
@@ -723,5 +1129,94 @@
   </footer>
   <script src="scripts/carousel.js"></script>
   <script src="scripts/project-videos.js"></script>
+  <script src="scripts/project-modal.js"></script>
+  <script>
+    const contributionCalendar = document.querySelector(".calendar");
+    const contributionSummary = document.querySelector(".contribution-summary");
+    const contributionYears = document.querySelector(".contribution-years");
+    const githubUser = "DavidRubioMoreno";
+    const contributionCache = new Map();
+    const contributionCacheTime = 10 * 60 * 1000;
+    const currentYear = new Date().getFullYear();
+    const availableYears = Array.from({ length: currentYear - 2023 + 1 }, (_, index) => currentYear - index);
+    let activeContributionYear = currentYear;
+
+    function renderContributionYears() {
+      if (!contributionYears) return;
+
+      contributionYears.innerHTML = "";
+      availableYears.forEach((year) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "contribution-year";
+        button.textContent = year;
+        button.setAttribute("aria-pressed", String(year === activeContributionYear));
+        if (year === activeContributionYear) button.classList.add("active");
+        button.addEventListener("click", () => loadGithubContributions(year));
+        contributionYears.appendChild(button);
+      });
+    }
+
+    function renderContributionCalendar(year, data) {
+      if (!contributionCalendar || !contributionSummary) return;
+
+      activeContributionYear = year;
+      renderContributionYears();
+      contributionCalendar.innerHTML = "";
+
+      const contributions = data.contributions || [];
+      const firstContribution = contributions[0];
+      const initialOffset = firstContribution ? new Date(`${firstContribution.date}T00:00:00`).getDay() : 0;
+
+      for (let index = 0; index < initialOffset; index += 1) {
+        contributionCalendar.appendChild(document.createElement("span"));
+      }
+
+      contributions.forEach((day) => {
+        const cell = document.createElement("span");
+        cell.className = "contribution-day";
+        cell.dataset.level = day.level;
+        cell.title = `${day.date}: ${day.count} contribuciones`;
+        contributionCalendar.appendChild(cell);
+      });
+
+      const total = data.total && data.total[year] !== undefined
+        ? data.total[year]
+        : contributions.reduce((sum, day) => sum + day.count, 0);
+
+      contributionSummary.textContent = `${total} contribuciones en ${year}`;
+    }
+
+    function loadGithubContributions(year = activeContributionYear, forceRefresh = false) {
+      if (!contributionCalendar || !contributionSummary) return;
+
+      const cached = contributionCache.get(year);
+      if (!forceRefresh && cached && Date.now() - cached.loadedAt < contributionCacheTime) {
+        renderContributionCalendar(year, cached.data);
+        return;
+      }
+
+      activeContributionYear = year;
+      renderContributionYears();
+      contributionSummary.textContent = `Cargando contribuciones de ${year}...`;
+
+      fetch(`https://github-contributions-api.jogruber.de/v4/${githubUser}?y=${year}`)
+        .then((response) => {
+          if (!response.ok) throw new Error("GitHub contributions request failed");
+          return response.json();
+        })
+        .then((data) => {
+          contributionCache.set(year, { data, loadedAt: Date.now() });
+          renderContributionCalendar(year, data);
+        })
+        .catch(() => {
+          contributionSummary.textContent = "No se pudieron cargar las contribuciones de GitHub.";
+        });
+    }
+
+    renderContributionYears();
+    loadGithubContributions();
+    window.setInterval(() => loadGithubContributions(activeContributionYear, true), contributionCacheTime);
+  </script>
 </body>
 </html>
