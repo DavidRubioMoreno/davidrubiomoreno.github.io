@@ -415,6 +415,27 @@
     .project-link {
       color: var(--accent);
       font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .project-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-warm);
+      transition: width 0.25s ease;
+      border-radius: 1px;
+    }
+
+    .project-link:hover::after {
+      width: 100%;
     }
 
     .project-action {
@@ -430,7 +451,7 @@
       font-weight: 800;
       cursor: pointer;
       box-shadow: 0 12px 28px rgba(53, 208, 186, 0.14);
-      transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      transition: color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .project-action:hover,
@@ -438,7 +459,7 @@
       color: var(--accent-warm);
       border-color: var(--accent-warm);
       box-shadow: 0 16px 34px rgba(230, 180, 80, 0.16);
-      transform: translateY(-2px);
+      transform: translateY(-3px) scale(1.04);
       outline: none;
     }
 
@@ -586,6 +607,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
+      margin-top: 24px;
     }
 
     .project-modal-links a {
@@ -598,6 +620,36 @@
       color: var(--accent);
       background: rgba(53, 208, 186, 0.08);
       font-weight: 800;
+      transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .project-modal-links a:hover {
+      color: var(--bg);
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(53, 208, 186, 0.25);
+    }
+
+    .project-modal-contributions {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .project-modal-contributions h4 {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .project-modal-contributions p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.7;
     }
 
     body.modal-open {
@@ -992,7 +1044,7 @@
           </p>
         </div>
         <div class="portfolio-grid">
-          <article class="project-card">
+          <article class="project-card" data-description="Motor 3D de alto rendimiento desarrollado en C++ utilizando librerías actuales. El motor implementa renderizado, sonido, físicas y soporte para juegos propios." data-contributions="">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/Demo%20H-Engine.mp4" type="video/mp4">
@@ -1007,7 +1059,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-description="Expansión del motor H-Engine implementando ray tracing completamente desde 0, permitiendo al motor renderizar con este modo." data-contributions="">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/RayTracing.mkv" type="video/x-matroska">
@@ -1022,7 +1074,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-description="Juego estilo Tower Defense en 3D con oleadas dinámicas de enemigos. Este ofrece un sistema de progresión con compra, distintos niveles con decenas de oleadas y enemigos variados." data-contributions="">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/Trailer%20H-Defense.mp4" type="video/mp4">
@@ -1037,7 +1089,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-description="Videojuego de acción y rol en tercera persona desarrollado en Unity. Presenta mecánicas de combate pulidas, animaciones fluidas, un sistema dinámico de combos y progresión del personaje." data-contributions="">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/EndlessRedemption.mkv" type="video/x-matroska">
@@ -1053,7 +1105,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-description="Herramienta procedural interactiva desarrollada para Unreal Engine 5. Permite diseñar, generar y orbitar sistemas estelares enteros, planetas y cinturones de asteroides con alta fidelidad visual." data-contributions="">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/CosmicArchitect.mp4" type="video/mp4">
@@ -1069,7 +1121,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-description="Aventura inmersiva de misterio y puzles en primera persona creada para la Global Game Jam 2026. Ofrece un diseño sonoro envolvente, una atmósfera tensa y mecánicas narrativas interactivas." data-contributions="">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/NightmareTales.mkv" type="video/x-matroska">
@@ -1085,7 +1137,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-description="Simulador VR, en el cúal experimentas un entrenamiento en una base militar. Deberás disparar y recargar maunualmente para cumplir con el programa militar." data-contributions="">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/EntrenamientoMilitar.mp4" type="video/x-matroska">
@@ -1100,7 +1152,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-description="Simulador estructural interactivo centrado en la ingeniería física de puentes. Crea una estructura que permita cruzarse de forma continua y sin derrumbes." data-contributions="">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/BridgeIt.mkv" type="video/x-matroska">
@@ -1115,7 +1167,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-description="Juego RPG en tercera persona publicado en Itch.io (GlobalGameJam_2025). Controla a Manín durante su aventura para recoger las ramas sagradas y derrotar a sus enemigos." data-contributions="">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/ManinElLiderDelaBanda.mp4" type="video/mp4">
@@ -1131,7 +1183,8 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-description="Juego arcade de velocidad de escritura y reflejos creado para la ComJamOn2026. Desafía tu destreza tecleando con fluidez programas dinámicos para avanzar y aprobar las asignaturas de la carrera." 
+          data-contributions="Diseño del juego e implementación de las distintas escenas y su comportamiento.">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/StringTyping.mkv" type="video/x-matroska">
@@ -1147,7 +1200,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-description="Juego y entorno interactivo en Itch.io. Experimenta con las distintas armas que ofrece la simulación e interactua espacialmente con el entorno para completar los puzzles." data-contributions="">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/TheSimulation.mkv" type="video/x-matroska">

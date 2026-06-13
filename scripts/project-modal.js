@@ -25,7 +25,11 @@ modal.innerHTML = `
     <div class="project-modal-content">
       <div class="project-modal-media"></div>
       <div class="project-modal-info">
-        <p></p>
+        <p class="project-modal-description"></p>
+        <div class="project-modal-contributions">
+          <h4>Contribuciones</h4>
+          <p class="project-modal-contributions-text"></p>
+        </div>
         <div class="project-modal-links"></div>
       </div>
     </div>
@@ -35,7 +39,8 @@ document.body.appendChild(modal);
 
 const modalTitle = modal.querySelector("#project-modal-title");
 const modalMedia = modal.querySelector(".project-modal-media");
-const modalDescription = modal.querySelector(".project-modal-info p");
+const modalDescription = modal.querySelector(".project-modal-description");
+const modalContributions = modal.querySelector(".project-modal-contributions-text");
 const modalLinks = modal.querySelector(".project-modal-links");
 const modalClose = modal.querySelector(".project-modal-close");
 
@@ -92,10 +97,12 @@ function renderProjectMedia(card, title) {
 
 function openProjectModal(card) {
   const title = card.querySelector("h3").textContent;
-  const description = card.querySelector("p").textContent;
+  const description = card.dataset.description || card.querySelector("p").textContent;
+  const contributions = card.dataset.contributions || "";
 
   modalTitle.textContent = title;
   modalDescription.textContent = description;
+  modalContributions.textContent = contributions;
   modalLinks.innerHTML = "";
   getProjectLinks(card, title).forEach((link) => modalLinks.appendChild(createLink(link.label, link.href)));
   renderProjectMedia(card, title);
