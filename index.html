@@ -341,12 +341,8 @@
       grid-template-columns: minmax(360px, 48%) 1fr;
       min-height: 300px;
       opacity: 0;
-      transform: translateX(-52px);
-      transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.2s ease;
-    }
-
-    .project-card:nth-child(even) {
       transform: translateX(52px);
+      transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.2s ease;
     }
 
     .project-card.is-visible {
@@ -1044,6 +1040,24 @@
           </p>
         </div>
         <div class="portfolio-grid">
+
+          <article class="project-card" data-description="Plugin de C++/Blueprints para Unreal Engine 5 (publicado en Fab), creado como trabajo de fin de grado en grupo de 3. Este permite generar sistemas planetarios proceduralmente, además implementa sistemas de LOD, colisiones, distribución automática de vegetación y un sistema que combina órbitas elípticas con simulación N-cuerpos." 
+          data-contributions="Investigación, creación de requisitos funcionales, implementación de: estructura de módulos, sistema de LOD, actualización por fases, sistema de generación de ruido con patrón Strategy, materiales, oceano, simulación N-cuerpos, generador de texturas 3D, pruebas de rendimiento, página web. Cumplimiento de requisitos técnicos para publicar en Fab. ">
+            <div class="project-media">
+              <video class="project-video" muted loop playsinline preload="metadata">
+                <source src="assets/videos/CosmicArchitect.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="project-body">
+              <h3>Cosmic Architect</h3>
+              <p>Herramienta procedural interactiva desarrollada para Unreal Engine 5. Permite diseñar, generar y orbitar sistemas estelares enteros, planetas y cinturones de asteroides con alta fidelidad visual.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://github.com/narratech/TFG-Bravo-Perez-Rubio" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+                <a class="project-link" href="https://www.fab.com/listings/4e181e3f-0077-4ed6-8079-39e679ddfe24?tab=reviews" target="_blank" rel="noopener noreferrer">Ver en Fab</a>
+              </div>
+            </div>
+          </article>
+
           <article class="project-card" data-description="Motor 3D creado en C++ y Lua usando Fmod, Ogre3D, SDL, PhysX e ImGUI, con arquitectura ECS. Proyecto en grupo de 10 personas. Se crearon además 2 juegos compatibles con el motor." 
           data-contributions="Selección de librerías, implementación del módulo de renderizado e input, implementación del juego Nini-Strikers.">
             <div class="project-media">
@@ -1076,18 +1090,19 @@
             </div>
           </article>
 
-          <article class="project-card" data-description="Juego creado sin motor gráfico usando la librería de C++ SDL con OpenGL, equipo de 10 personas. La implementación usa el modelo ECS." 
-          data-contributions="Integración de animaciones, partículas, sistema de meteorología y lógica de las torres.">
+          <article class="project-card" data-description="Juego arcade de velocidad de escritura y reflejos creado para la ComJamOn2026. Desafía tu destreza tecleando con fluidez programas dinámicos para avanzar y aprobar las asignaturas de la carrera." 
+          data-contributions="Diseño del juego e implementación de las distintas escenas y su comportamiento.">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
-                <source src="assets/videos/Trailer%20H-Defense.mp4" type="video/mp4">
+                <source src="assets/videos/StringTyping.mkv" type="video/x-matroska">
               </video>
             </div>
             <div class="project-body">
-              <h3>H-TowerDefense</h3>
-              <p>Juego estilo Tower Defense en 2.5 con oleadas dinámicas de enemigos. Este ofrece un sistema de progresión con compra, distintos niveles con decenas de oleadas y enemigos variados.</p>
+              <h3>String Typing</h3>
+              <p>Juego arcade de velocidad de escritura y reflejos creado para la ComJamOn2026. Desafía tu destreza tecleando con fluidez programas dinámicos para avanzar y aprobar las asignaturas de la carrera.</p>
               <div class="project-links-row">
-                <a class="project-link" href="https://github.com/DavidRubioMoreno/HTowerDefense" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+                <a class="project-link" href="https://github.com/DavidRubioMoreno/ComJamOn2026" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+                <a class="project-link" href="https://javi16333.itch.io/string-typing" target="_blank" rel="noopener noreferrer">Visitar Itch.io</a>
               </div>
             </div>
           </article>
@@ -1109,23 +1124,6 @@
             </div>
           </article>
 
-          <article class="project-card" data-description="Plugin de C++/Blueprints para Unreal Engine 5 (publicado en Fab), creado como trabajo de fin de grado en grupo de 3. Este permite generar sistemas planetarios proceduralmente, además implementa sistemas de LOD, colisiones, distribución automática de vegetación y un sistema que combina órbitas elípticas con simulación N-cuerpos." 
-          data-contributions="Investigación, creación de requisitos funcionales, implementación de: estructura de módulos, sistema de LOD, actualización por fases, sistema de generación de ruido con patrón Strategy, materiales, oceano, simulación N-cuerpos, generador de texturas 3D, pruebas de rendimiento, página web. Cumplimiento de requisitos técnicos para publicar en Fab. ">
-            <div class="project-media">
-              <video class="project-video" muted loop playsinline preload="metadata">
-                <source src="assets/videos/CosmicArchitect.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="project-body">
-              <h3>Cosmic Architect</h3>
-              <p>Herramienta procedural interactiva desarrollada para Unreal Engine 5. Permite diseñar, generar y orbitar sistemas estelares enteros, planetas y cinturones de asteroides con alta fidelidad visual.</p>
-              <div class="project-links-row">
-                <a class="project-link" href="https://github.com/narratech/TFG-Bravo-Perez-Rubio" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
-                <a class="project-link" href="https://www.fab.com/listings/4e181e3f-0077-4ed6-8079-39e679ddfe24?tab=reviews" target="_blank" rel="noopener noreferrer">Ver en Fab</a>
-              </div>
-            </div>
-          </article>
-
           <article class="project-card" data-description="Aventura inmersiva de misterio y puzles en primera persona creada para la Global Game Jam 2026, creada en Unity con un equipo de 4 personas." 
           data-contributions="Generación de salas, gestión de objetos y recolectables, intregración de partículas y loop del juego.">
             <div class="project-media">
@@ -1143,7 +1141,8 @@
             </div>
           </article>
 
-          <article class="project-card" data-description="Simulador VR, en el cúal experimentas un entrenamiento en una base militar. Deberás disparar y recargar maunualmente para cumplir con el programa militar." data-contributions="">
+          <article class="project-card" data-description="Proyecto en Unity desarrollado con las Meta Quest 2. Grupo de 3 integrantes." 
+          data-contributions="Configuración del proyecto para compatibilidad con las gafas, creación de la escena, sistema de puntuación.">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/EntrenamientoMilitar.mp4" type="video/x-matroska">
@@ -1158,7 +1157,24 @@
             </div>
           </article>
 
-          <article class="project-card" data-description="Simulador estructural interactivo centrado en la ingeniería física de puentes. Crea una estructura que permita cruzarse de forma continua y sin derrumbes." data-contributions="">
+          <article class="project-card" data-description="Juego creado sin motor gráfico usando la librería de C++ SDL con OpenGL, equipo de 10 personas. La implementación usa el modelo ECS." 
+          data-contributions="Integración de animaciones, partículas, sistema de meteorología y lógica de las torres.">
+            <div class="project-media">
+              <video class="project-video" muted loop playsinline preload="metadata">
+                <source src="assets/videos/Trailer%20H-Defense.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="project-body">
+              <h3>H-TowerDefense</h3>
+              <p>Juego estilo Tower Defense en 2.5 con oleadas dinámicas de enemigos. Este ofrece un sistema de progresión con compra, distintos niveles con decenas de oleadas y enemigos variados.</p>
+              <div class="project-links-row">
+                <a class="project-link" href="https://github.com/DavidRubioMoreno/HTowerDefense" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-description="Proyecto en C++ usando PhysX para implementar sistemas de partículas, muelles, flotación e intregración propia, posteriormente creando una demo técnica." 
+          data-contributions="Proyecto individual.">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/BridgeIt.mkv" type="video/x-matroska">
@@ -1173,7 +1189,8 @@
             </div>
           </article>
 
-          <article class="project-card" data-description="Juego RPG en tercera persona publicado en Itch.io (GlobalGameJam_2025). Controla a Manín durante su aventura para recoger las ramas sagradas y derrotar a sus enemigos." data-contributions="">
+          <article class="project-card" data-description="Juego creado en grupo de 6 para la GlobalGameJam_2025. Esta desarrollado en Unity y Fmod." 
+          data-contributions="Escenarios, integración de párticulas, generación de enemigos, cinemáticas, sonido.">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/ManinElLiderDelaBanda.mp4" type="video/mp4">
@@ -1183,30 +1200,14 @@
               <h3>Manín: El Líder de la Banda</h3>
               <p>Juego RPG en tercera persona publicado en Itch.io (GlobalGameJam_2025). Controla a Manín durante su aventura para recoger las ramas sagradas y derrotar a sus enemigos.</p>
               <div class="project-links-row">
-                <a class="project-link" href="https://github.com/DavidRubioMoreno/ComJamon2025" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+                <a class="project-link" href="https://github.com/DavidRubioMoreno/ComJamon2025-Sonido" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
                 <a class="project-link" href="https://crest646.itch.io/manin-el-lider-de-la-banda" target="_blank" rel="noopener noreferrer">Visitar Itch.io</a>
               </div>
             </div>
           </article>
 
-          <article class="project-card" data-description="Juego arcade de velocidad de escritura y reflejos creado para la ComJamOn2026. Desafía tu destreza tecleando con fluidez programas dinámicos para avanzar y aprobar las asignaturas de la carrera." 
-          data-contributions="Diseño del juego e implementación de las distintas escenas y su comportamiento.">
-            <div class="project-media">
-              <video class="project-video" muted loop playsinline preload="metadata">
-                <source src="assets/videos/StringTyping.mkv" type="video/x-matroska">
-              </video>
-            </div>
-            <div class="project-body">
-              <h3>String Typing</h3>
-              <p>Juego arcade de velocidad de escritura y reflejos creado para la ComJamOn2026. Desafía tu destreza tecleando con fluidez programas dinámicos para avanzar y aprobar las asignaturas de la carrera.</p>
-              <div class="project-links-row">
-                <a class="project-link" href="https://github.com/DavidRubioMoreno/ComJamOn2026" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
-                <a class="project-link" href="https://javi16333.itch.io/string-typing" target="_blank" rel="noopener noreferrer">Visitar Itch.io</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card" data-description="Juego y entorno interactivo en Itch.io. Experimenta con las distintas armas que ofrece la simulación e interactua espacialmente con el entorno para completar los puzzles." data-contributions="">
+          <article class="project-card" data-description="Juego y entorno interactivo en Itch.io. Experimenta con las distintas armas que ofrece la simulación e interactua espacialmente con el entorno para completar los puzzles." 
+          data-contributions="Proyecto individual.">
             <div class="project-media">
               <video class="project-video" muted loop playsinline preload="metadata">
                 <source src="assets/videos/TheSimulation.mkv" type="video/x-matroska">
