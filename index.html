@@ -611,7 +611,7 @@
     }
 
     .project-media::after {
-      content: content: "";
+      content: "";
       position: absolute;
       inset: 0;
       background:
@@ -1017,6 +1017,7 @@
       background: rgba(0, 255, 136, 0.06);
       transform: translateY(-3px);
       box-shadow: 0 8px 24px var(--accent-glow);
+    }
     .site-footer {
       padding: 28px 0;
       border-top: 1px solid var(--panel-border);
@@ -1157,43 +1158,62 @@
 
     .calendar {
       display: grid;
-      grid-template-columns: repeat(53, 12px);
-      grid-template-rows: repeat(7, 12px);
-      grid-auto-flow: column;
-      gap: 4px;
+      grid-template-columns: 28px repeat(54, 11px);
+      grid-template-rows: auto repeat(7, 11px);
+      gap: 2px;
       width: max-content;
     }
 
+    .calendar-month {
+      font-size: 0.6rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      align-self: end;
+      padding-bottom: 2px;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .calendar-weekday {
+      font-size: 0.55rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      align-self: center;
+      text-align: right;
+      padding-right: 4px;
+      line-height: 1;
+    }
+
     .contribution-day {
-      width: 12px;
-      height: 12px;
-      border-radius: 3px;
-      background: var(--panel-strong);
-      border: 1px solid var(--panel-border);
-      transition: all 0.2s ease;
+      width: 11px;
+      height: 11px;
+      border-radius: 2px;
+      background: transparent;
+      border: 1px solid var(--panel-strong);
+      transition: all 0.15s ease;
+      cursor: default;
     }
 
     .contribution-day:hover {
-      transform: scale(1.3);
+      outline: 2px solid var(--accent);
+      outline-offset: -1px;
       z-index: 1;
     }
 
     .contribution-day[data-level="1"] {
-      background: rgba(0, 255, 136, 0.15);
+      background: rgba(0, 255, 136, 0.12);
     }
 
     .contribution-day[data-level="2"] {
-      background: rgba(0, 255, 136, 0.35);
+      background: rgba(0, 255, 136, 0.3);
     }
 
     .contribution-day[data-level="3"] {
-      background: rgba(0, 255, 136, 0.6);
-      box-shadow: 0 0 8px var(--accent-glow);
+      background: rgba(0, 255, 136, 0.55);
     }
 
     .contribution-day[data-level="4"] {
       background: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow);
     }
 
     .contribution-legend {
@@ -1206,9 +1226,9 @@
 
     .contribution-legend span:not(:first-child):not(:last-child) {
       display: inline-block;
-      width: 12px;
-      height: 12px;
-      border-radius: 3px;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
     }
   </style>
 </head>
@@ -1658,18 +1678,67 @@
       contributionCalendar.innerHTML = "";
 
       const contributions = data.contributions || [];
-      const firstContribution = contributions[0];
-      const initialOffset = firstContribution ? new Date(`${firstContribution.date}T00:00:00`).getDay() : 0;
+      if (contributions.length === 0) return;
 
-      for (let index = 0; index < initialOffset; index += 1) {
-        contributionCalendar.appendChild(document.createElement("span"));
+      const firstDate = new Date(`${contributions[0].date}T00:00:00`);
+      const initialOffset = firstDate.getDay();
+
+      // --- Month labels ---
+      const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      const daysToMonth = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+      const isLeap = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+      const d2m = [...daysToMonth];
+      if (isLeap) {
+        for (let m = 2; m < d2m.length; m++) d2m[m]++;
       }
 
-      contributions.forEach((day) => {
+      monthNames.forEach((name, m) => {
+        const cellIdx = initialOffset + d2m[m];
+        const col = 2 + Math.floor(cellIdx / 7);
+        if (col <= 55) {
+          const el = document.createElement("span");
+          el.className = "calendar-month";
+          el.textContent = name;
+          el.style.gridRow = "1";
+          el.style.gridColumn = col.toString();
+          contributionCalendar.appendChild(el);
+        }
+      });
+
+      // --- Weekday labels (Mon, Wed, Fri) ---
+      const weekdays = ["Mon", "Wed", "Fri"];
+      weekdays.forEach((name, i) => {
+        const row = 3 + i * 2;
+        const el = document.createElement("span");
+        el.className = "calendar-weekday";
+        el.textContent = name;
+        el.style.gridRow = row.toString();
+        el.style.gridColumn = "1";
+        contributionCalendar.appendChild(el);
+      });
+
+      // --- Empty offset cells before Jan 1 ---
+      for (let i = 0; i < initialOffset; i++) {
+        const cell = document.createElement("span");
+        cell.className = "contribution-day";
+        cell.dataset.level = "0";
+        cell.style.gridRow = (2 + i).toString();
+        cell.style.gridColumn = "2";
+        contributionCalendar.appendChild(cell);
+      }
+
+      // --- Contribution cells ---
+      contributions.forEach((day, index) => {
+        const cellIdx = initialOffset + index;
+        const col = 2 + Math.floor(cellIdx / 7);
+        const row = 2 + (cellIdx % 7);
+
         const cell = document.createElement("span");
         cell.className = "contribution-day";
         cell.dataset.level = day.level;
         cell.title = `${day.date}: ${day.count} contribuciones`;
+        cell.style.gridRow = row.toString();
+        cell.style.gridColumn = Math.min(col, 55).toString();
         contributionCalendar.appendChild(cell);
       });
 
