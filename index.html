@@ -329,6 +329,32 @@
       filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
     }
 
+    .soft-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .soft-skill-card {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .soft-skill-card:hover {
+      border-color: rgba(53, 208, 186, 0.6);
+      background: rgba(53, 208, 186, 0.06);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(53, 208, 186, 0.12);
+    }
+
     .portfolio-grid {
       display: flex;
       flex-direction: column;
@@ -1023,6 +1049,31 @@
             <div class="skill-item"><img src="assets/icons/visualcode.webp" alt="" aria-hidden="true"></div>
           </div>
         </div>
+        <div class="soft-skills-grid">
+          <div class="soft-skill-card">Trabajo en equipo</div>
+          <div class="soft-skill-card">Control de versiones</div>
+          <div class="soft-skill-card">Resolución de problemas</div>
+          <div class="soft-skill-card">Comunicación técnica</div>
+          <div class="soft-skill-card">Gestión de proyectos</div>
+          <div class="soft-skill-card">Estructuras de datos</div>
+          <div class="soft-skill-card">Algoritmos avanzados</div>
+          <div class="soft-skill-card">Pensamiento crítico</div>
+          <div class="soft-skill-card">Adaptabilidad</div>
+          <div class="soft-skill-card">Documentación</div>
+          <div class="soft-skill-card">Investigación</div>
+          <div class="soft-skill-card">Programación de GPUs</div>
+          <div class="soft-skill-card">Simulación física</div>
+          <div class="soft-skill-card">Shaders e iluminación</div>
+          <div class="soft-skill-card">Aprendizaje automático</div>
+          <div class="soft-skill-card">Optimización de código</div>
+          <div class="soft-skill-card">Programación asíncrona</div>
+          <div class="soft-skill-card">Desarrollo en Unity</div>
+          <div class="soft-skill-card">Desarrollo en Unreal</div>
+          <div class="soft-skill-card">Desarrollo multiplataforma</div>
+          <div class="soft-skill-card">Programación agéntica</div>
+          <div class="soft-skill-card">IA aplicada</div>
+          
+        </div>
       </div>
     </section>
 
@@ -1231,7 +1282,7 @@
         <div class="contact-actions">
           <a class="contact-link" href="mailto:darumo04@gmail.com">darumo04@gmail.com</a>
           <a class="contact-link" href="https://www.linkedin.com/in/david-rubio-moreno-a94681409/?trk=public-profile-join-page" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a class="contact-link" href="https://github.com/DavidRubioMoreno" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+          <a class="contact-link" href="https://github.com/DavidRubioMoreno" target="_blank" rel="noopener noreferrer">Ver Perfil GitHub</a>
         </div>
       </div>
     </section>
